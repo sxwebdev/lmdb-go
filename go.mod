@@ -1,4 +1,4 @@
-module github.com/bmatsuo/lmdb-go
+module github.com/PowerDNS/lmdb-go
 
 go 1.15
 

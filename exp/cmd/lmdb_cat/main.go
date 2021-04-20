@@ -10,10 +10,10 @@ import (
 	"os"
 	"strings"
 
-	"github.com/bmatsuo/lmdb-go/exp/lmdbsync"
-	"github.com/bmatsuo/lmdb-go/internal/lmdbcmd"
-	"github.com/bmatsuo/lmdb-go/lmdb"
-	"github.com/bmatsuo/lmdb-go/lmdbscan"
+	"github.com/PowerDNS/lmdb-go/exp/lmdbsync"
+	"github.com/PowerDNS/lmdb-go/internal/lmdbcmd"
+	"github.com/PowerDNS/lmdb-go/lmdb"
+	"github.com/PowerDNS/lmdb-go/lmdbscan"
 )
 
 func main() {
