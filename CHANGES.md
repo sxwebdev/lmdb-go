@@ -2,6 +2,57 @@
 
 ## v1.9.0-dev
 
+First release of this PowerDNS/lmdb-go fork.
+
+- Renamed module from `github.com/bmatsuo/lmdb-go` to `github.com/PowerDNS/lmdb-go` (#3, PR #7)
+- Add `go.mod` and fix tests and Travis CI on recent Go versions (#5, PR #6)
+- Fix: Cursor.Put would write "\x00" instead of an empty value (#1, PR #2)
+- lmdb: Update LMDB C library to version 0.9.28 (#4).
+
+```
+	LMDB 0.9.28 Release (2021/02/04)
+		ITS#8662 add -a append option to mdb_load
+	
+	LMDB 0.9.27 Release (2020/10/26)
+		ITS#9376 fix repeated DUPSORT cursor deletes
+	
+	LMDB 0.9.26 Release (2020/08/11)
+		ITS#9278 fix robust mutex cleanup for FreeBSD
+	
+	LMDB 0.9.25 Release (2020/01/30)
+		ITS#9068 fix mdb_dump/load backslashes in printable content
+		ITS#9118 add MAP_NOSYNC for FreeBSD
+		ITS#9155 free mt_spill_pgs in non-nested txn on end
+	
+	LMDB 0.9.24 Release (2019/07/24)
+		ITS#8969 Tweak mdb_page_split
+		ITS#8975 WIN32 fix writemap set_mapsize crash
+		ITS#9007 Fix loose pages in WRITEMAP
+	
+	LMDB 0.9.23 Release (2018/12/19)
+		ITS#8756 Fix loose pages in dirty list
+		ITS#8831 Fix mdb_load flag init
+		ITS#8844 Fix mdb_env_close in forked process
+		Documentation
+			ITS#8857 mdb_cursor_del doesn't invalidate cursor
+			ITS#8908 GET_MULTIPLE etc don't change passed in key
+	
+	LMDB 0.9.22 Release (2018/03/22)
+		Fix MDB_DUPSORT alignment bug (ITS#8819)
+		Fix regression with new db from 0.9.19 (ITS#8760)
+		Fix liblmdb to build on Solaris (ITS#8612)
+		Fix delete behavior with DUPSORT DB (ITS#8622)
+		Fix mdb_cursor_get/mdb_cursor_del behavior (ITS#8722)
+	
+	LMDB 0.9.21 Release (2017/06/01)
+		Fix xcursor after cursor_del (ITS#8622)
+	
+	LMDB 0.9.20 (Withdrawn)
+		Fix mdb_load with escaped plaintext (ITS#8558)
+		Fix mdb_cursor_last / mdb_put interaction (ITS#8557)
+```
+
+
 Changes predating the PowerDNS fork (up to 2017):
 
 - Fix unsafe threading behavior in benchmarks (bmatsuo/lmdb-go#101)
