@@ -3,6 +3,7 @@
 /lmdb/openldap
 
 /bin/
+/tmp/
 
 # Test databases and benchmark data
 testdata/
@@ -29,3 +30,4 @@ _cgo_export.*
 _testmain.go
 
 *.exe
+
