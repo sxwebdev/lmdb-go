@@ -1,6 +1,23 @@
-# lmdb-go [![releases/v1.8.0](https://img.shields.io/badge/release-v1.8.0-375eab.svg)](releases) [![C/v0.9.19](https://img.shields.io/badge/C-v0.9.19-555555.svg)](https://github.com/LMDB/lmdb/blob/mdb.RE/0.9/libraries/liblmdb/CHANGES) [![Build Status](https://travis-ci.org/bmatsuo/lmdb-go.svg?branch=master)](https://travis-ci.org/bmatsuo/lmdb-go)
+# lmdb-go [![releases/v1.8.0](https://img.shields.io/badge/release-v1.8.0-375eab.svg)](releases) [![C/v0.9.19](https://img.shields.io/badge/C-v0.9.19-555555.svg)](https://github.com/LMDB/lmdb/blob/mdb.RE/0.9/libraries/liblmdb/CHANGES) [![Build Status](https://travis-ci.com/PowerDNS/lmdb-go.svg?branch=master)](https://travis-ci.com/PowerDNS/lmdb-go)
 
 Go bindings to the OpenLDAP Lightning Memory-Mapped Database (LMDB).
+
+## About this fork
+
+This fork was created after the upstream repository [bmatsuo/lmdb-go](https://github.com/bmatsuo/lmdb-go)
+went without updates for 4 years. We would like to express our thanks to
+*bmatsuo* for creating and maintaining this repository until 2017.
+
+We decided to rename this repository to allow usage without `replace`
+directives in the `go.mod`, as we do not expect this to be a temporary
+fork. This also makes it clear that new versions released here are
+different from any upstream versions.
+
+To use this package, update all your import paths from
+`github.com/bmatsuo/lmdb-go` to `github.com/PowerDNS/lmdb-go`.
+
+This affects all versions starting from 1.9.0.
+
 
 ## Packages
 
