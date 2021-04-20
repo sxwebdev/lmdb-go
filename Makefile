@@ -2,7 +2,7 @@
 .PHONY: deps all test full-test bin
 
 deps:
-	go get -d ./...
+	go mod download
 
 bin:
 	mkdir -p bin
