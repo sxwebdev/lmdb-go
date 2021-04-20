@@ -1,6 +1,6 @@
 # Release Change Log
 
-## v1.9.0-dev
+## v1.9.0 (2021-04-20)
 
 First release of this PowerDNS/lmdb-go fork.
 
