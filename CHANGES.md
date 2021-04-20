@@ -7,6 +7,7 @@ First release of this PowerDNS/lmdb-go fork.
 - Renamed module from `github.com/bmatsuo/lmdb-go` to `github.com/PowerDNS/lmdb-go` (#3, PR #7)
 - Add `go.mod` and fix tests and Travis CI on recent Go versions (#5, PR #6)
 - Fix: Cursor.Put would write "\x00" instead of an empty value (#1, PR #2)
+- Remove experimental, never released `exp/lmdbpool` package (PR #9)
 - lmdb: Update LMDB C library to version 0.9.28 (#4).
 
 ```
