@@ -1,31 +1,33 @@
-#Release Change Log
+# Release Change Log
 
-##v1.9.0-dev
+## v1.9.0-dev
 
-- Fix unsafe threading behavior in benchmarks (#101)
-- Update transactions no longer allocate `MDB_val` objects (#102)
-- Txn.Renew no longer clears the Txn finalizer -- prevents resource leaks (#104)
+Changes predating the PowerDNS fork (up to 2017):
+
+- Fix unsafe threading behavior in benchmarks (bmatsuo/lmdb-go#101)
+- Update transactions no longer allocate `MDB_val` objects (bmatsuo/lmdb-go#102)
+- Txn.Renew no longer clears the Txn finalizer -- prevents resource leaks (bmatsuo/lmdb-go#104)
 - Txn.Pooled field added so that the Txn finalizer may work better with
-  sync.Pool (#104/#105)
-- Fixed a race in the Txn finalizer that could lead to a segfault (#105)
+  sync.Pool (bmatsuo/lmdb-go#104 bmatsuo/lmdb-go#105)
+- Fixed a race in the Txn finalizer that could lead to a segfault (bmatsuo/lmdb-go#105)
 - Txn.RunOp method added so that it is possible for other packages to create
-  other flavors of managed transactions from scratch (#105)
+  other flavors of managed transactions from scratch (bmatsuo/lmdb-go#105)
 - Experimental package lmdbpool was added to make integration of lmdb and
-  sync.Pool easier (#104/#105)
+  sync.Pool easier (bmatsuo/lmdb-go#104 bmatsuo/lmdb-go#105)
 
 ```
 go get github.com/PowerDNS/lmdb-go/exp/lmdbpool
 ```
 
-- Silence aggressive struct initializer warning from clang (#107)
+- Silence aggressive struct initializer warning from clang (bmatsuo/lmdb-go#107)
 - Improved documentation regarding long-running transactions and dead readers
-  (#111)
+  (bmatsuo/lmdb-go#111)
 
-##v1.8.0 (2017-02-10)
+## v1.8.0 (2017-02-10)
 
 - lmdbscan: The package was moved out of the exp/ subtree and can now be
   considered stable and suitable for general use.
-- lmdb: Update LMDB C library to version 0.9.19 (#92).
+- lmdb: Update LMDB C library to version 0.9.19 (bmatsuo/lmdb-go#92).
 
 ```
 	Fix mdb_env_cwalk cursor init (ITS#8424)
@@ -51,38 +53,38 @@ go get github.com/PowerDNS/lmdb-go/exp/lmdbpool
 ```
 
 - lmdb: Fix resource leak in cursor tests (bcf4e9f).
-- lmdb: Fix panic in Cursor.Get when using the Set op (#96).
+- lmdb: Fix panic in Cursor.Get when using the Set op (bmatsuo/lmdb-go#96).
 - docs: Improve documentation about when runtime.LockOSThread is required
 
-##v1.7.0
+## v1.7.0
 
-- lmdb: Removed unnecessary import of the "math" package (#70).
+- lmdb: Removed unnecessary import of the "math" package (bmatsuo/lmdb-go#70).
 - lmdb: Removed direct dependency on the "fmt" package and reduced error
-  related allocation (#73).
+  related allocation (bmatsuo/lmdb-go#73).
 - cmd/lmdb_stat: Fix transaction ID decoding and match output of `mdb_stat`
-  1-to-1 (#78).
-- lmdb: fix compilation for 32-bit architectures (#83).
+  1-to-1 (bmatsuo/lmdb-go#78).
+- lmdb: fix compilation for 32-bit architectures (bmatsuo/lmdb-go#83).
 
-##v1.6.0 (2016-04-07)
+## v1.6.0 (2016-04-07)
 
-- lmdb: method Txn.ID() exposing mdb_txn_id. (#47)
-- lmdb: Env.ReaderList() returns an error if passed a nil function. (#48)
-- lmdbsync: realistic test of resizing functionality (#7)
-- lmdbsync: use context.Context instead of a hand-rolled Bag (#51)
-- lmdbsync: Handler Env is now an argument instead of a context value (#52)
-- lmdbsync: Changes to MapResizedHandler and its default values (#54)
+- lmdb: method Txn.ID() exposing mdb_txn_id. (bmatsuo/lmdb-go#47)
+- lmdb: Env.ReaderList() returns an error if passed a nil function. (bmatsuo/lmdb-go#48)
+- lmdbsync: realistic test of resizing functionality (bmatsuo/lmdb-go#7)
+- lmdbsync: use context.Context instead of a hand-rolled Bag (bmatsuo/lmdb-go#51)
+- lmdbsync: Handler Env is now an argument instead of a context value (bmatsuo/lmdb-go#52)
+- lmdbsync: Changes to MapResizedHandler and its default values (bmatsuo/lmdb-go#54)
 - lmdb: Fix CGO argument check panic for certain []byte values produced from a
-  bytes.Buffer (#56)
+  bytes.Buffer (bmatsuo/lmdb-go#56)
 - lmdb: Support building the C library with support for the pwritev(2) system
-  call (#58)
+  call (bmatsuo/lmdb-go#58)
 - lmdb: Reuse MDB_val values within transactions to reduce allocations in
-  transactions issuing multiple Get operations (#61).
+  transactions issuing multiple Get operations (bmatsuo/lmdb-go#61).
 - lmdb: Avoid allocation and linear scan overhead on the cgo boundary for
-  transaction operations (Get/Put and variants) (#63).
+  transaction operations (Get/Put and variants) (bmatsuo/lmdb-go#63).
 - lmdb: Use a more portable internal conversion from C pointers to slices
-  (#67).
+  (bmatsuo/lmdb-go#67).
 
-##v1.5.0
+## v1.5.0
 
 - lmdb: fix crash from bad interaction with Txn finalizer and Txn.Reset/.Renew.
 - lmdb: Update the LMDB C library to 0.9.18
@@ -103,7 +105,7 @@ go get github.com/PowerDNS/lmdb-go/exp/lmdbpool
         Update WRITEMAP description
 ```
 
-##v1.4.0
+## v1.4.0
 
 - development: The LMDB C library can be cloned under /lmdb -- it will be
   ignored.
@@ -150,19 +152,19 @@ go get github.com/PowerDNS/lmdb-go/exp/lmdbpool
 ```
 
 
-##v1.3.0
+## v1.3.0
 
-- all: Builds on Windows with passing tests. Fixes #33.
-- lmdb: Cursor.DBI returns "invalid" DBI if the cursor is closed. Fixes #31.
-- lmdb: Finalizers to prevent resource leaks. Fixes #20.
+- all: Builds on Windows with passing tests. Fixes bmatsuo/lmdb-go#33.
+- lmdb: Cursor.DBI returns "invalid" DBI if the cursor is closed. Fixes bmatsuo/lmdb-go#31.
+- lmdb: Finalizers to prevent resource leaks. Fixes bmatsuo/lmdb-go#20.
 - all: Internal test package for setting up, populating, and tearing down environments.
-- lmdbscan: Fix panic in Scanner.Scan after Txn.OpenCursor fails. Fixes #21.
+- lmdbscan: Fix panic in Scanner.Scan after Txn.OpenCursor fails. Fixes bmatsuo/lmdb-go#21.
 - lmdbscan: Scanner.Set[Next] methods move the cursor and make the next
-  Scanner.Scan a noop.  The changes should be backwards compatible. Fixes #17.
-- lmdb: Cgo calling convention meets rules set forth for go1.6. Fixes #10.
+  Scanner.Scan a noop.  The changes should be backwards compatible. Fixes bmatsuo/lmdb-go#17.
+- lmdb: Cgo calling convention meets rules set forth for go1.6. Fixes bmatsuo/lmdb-go#10.
 - lmdb: add a "Package" code example that shows a complete workflow
 
-##v1.2.0
+## v1.2.0
 
 - Many example tests replaced with simpler code examples.
 - Lots of documentation fixes
@@ -172,7 +174,7 @@ go get github.com/PowerDNS/lmdb-go/exp/lmdbpool
 - lmdb: Implement Env.FD() method returning an open file descriptor
 - lmdbgo.c: remove unnecessary `#include <string.h>`
 
-##v1.1.1
+## v1.1.1
 
 - Lots of code examples.
 - Lots of tests.
