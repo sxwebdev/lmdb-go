@@ -16,11 +16,8 @@ import (
 
 // This flags are used exclusively for Txn.OpenDBI and Txn.OpenRoot.  The
 // Create flag must always be supplied when opening a non-root DBI for the
-// first time.
-//
-// BUG(bmatsuo):
-// MDB_INTEGERKEY and MDB_INTEGERDUP aren't usable. I'm not sure they would be
-// faster with the cgo bridge.  They need to be tested and benchmarked.
+// first time. When a DBI is created, the other flags will be persisted in the
+// LMDB and automatically applied when opening the DBI.
 const (
 	// Flags for Txn.OpenDBI.
 
@@ -29,6 +26,14 @@ const (
 	DupFixed   = C.MDB_DUPFIXED   // Duplicate items have a fixed size (DupSort).
 	ReverseDup = C.MDB_REVERSEDUP // Reverse duplicate values (DupSort).
 	Create     = C.MDB_CREATE     // Create DB if not already existing.
+
+	// IntegerKey and IntegerDup should only be used when needed for
+	// compatibility with other programs that require them. The keys will be
+	// interpreted as in-memory integers and sorted according to the endianness
+	// of the system. The keys returned by the API calls will still be
+	// []byte slices.
+	IntegerKey = C.MDB_INTEGERKEY // Use native integer order.
+	IntegerDup = C.MDB_INTEGERDUP // Duplicate integers (DupSort).
 )
 
 // Txn is a database transaction in an environment.
