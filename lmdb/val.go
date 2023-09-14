@@ -19,8 +19,8 @@ import (
 // source file malloc.go and the compiler typecheck.go for more information
 // about memory limits and array bound limits.
 //
-//		https://github.com/golang/go/blob/a03bdc3e6bea34abd5077205371e6fb9ef354481/src/runtime/malloc.go#L151-L164
-//		https://github.com/golang/go/blob/36a80c5941ec36d9c44d6f3c068d13201e023b5f/src/cmd/compile/internal/gc/typecheck.go#L383
+//	https://github.com/golang/go/blob/a03bdc3e6bea34abd5077205371e6fb9ef354481/src/runtime/malloc.go#L151-L164
+//	https://github.com/golang/go/blob/36a80c5941ec36d9c44d6f3c068d13201e023b5f/src/cmd/compile/internal/gc/typecheck.go#L383
 //
 // On 64-bit systems, luckily, the value 2^32-1 coincides with the maximum data
 // size for LMDB (MAXDATASIZE).
@@ -42,9 +42,9 @@ type Multi struct {
 // WrapMulti converts a page of contiguous values with stride size into a
 // Multi.  WrapMulti panics if len(page) is not a multiple of stride.
 //
-//		_, val, _ := cursor.Get(nil, nil, lmdb.FirstDup)
-//		_, page, _ := cursor.Get(nil, nil, lmdb.GetMultiple)
-//		multi := lmdb.WrapMulti(page, len(val))
+//	_, val, _ := cursor.Get(nil, nil, lmdb.FirstDup)
+//	_, page, _ := cursor.Get(nil, nil, lmdb.GetMultiple)
+//	multi := lmdb.WrapMulti(page, len(val))
 //
 // See mdb_cursor_get and MDB_GET_MULTIPLE.
 func WrapMulti(page []byte, stride int) *Multi {
@@ -83,8 +83,7 @@ func (m *Multi) Stride() int {
 
 // Size returns the total size of the Multi data and is equal to
 //
-//		m.Len()*m.Stride()
-//
+//	m.Len()*m.Stride()
 func (m *Multi) Size() int {
 	return len(m.page)
 }

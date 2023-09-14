@@ -8,7 +8,7 @@ Bypassing an Env's methods to access the underlying lmdb.Env is not safe.  The
 severity of such usage depends such behavior should be strictly avoided as it
 may produce undefined behavior from the LMDB C library.
 
-Resizing the environment
+# Resizing the environment
 
 The Env type synchronizes all calls to Env.SetMapSize so that it may, with some
 caveats, be safely called in the presence of concurrent transactions after an
@@ -65,7 +65,7 @@ not OS X).
 
 See mdb_env_set_mapsize.
 
-MapFull
+# MapFull
 
 The MapFullHandler function configures an Env to automatically call increase
 the map size with Env.SetMapSize and retry transactions when a lmdb.MapFull
@@ -77,7 +77,7 @@ and do not cause unwanted additive change to the program state.
 
 See mdb_txn_commit and MDB_MAP_FULL.
 
-MapResized
+# MapResized
 
 When multiple processes access and resize an environment it is not uncommon to
 encounter a MapResized error which prevents the TxnOp from being executed and
@@ -90,7 +90,7 @@ TxnOp.
 
 See mdb_txn_begin and MDB_MAP_RESIZED.
 
-NoLock
+# NoLock
 
 When the lmdb.NoLock flag is set on an environment Env handles all transaction
 synchronization using Go structures and is an experimental feature.  It is

@@ -63,10 +63,10 @@ const (
 // Most often helper functions such as IsNotFound may be used instead of
 // dealing with Errno values directly.
 //
-//		lmdb.IsNotFound(err)
-//		lmdb.IsErrno(err, lmdb.TxnFull)
-//		lmdb.IsErrnoSys(err, syscall.EINVAL)
-//		lmdb.IsErrnoFn(err, os.IsPermission)
+//	lmdb.IsNotFound(err)
+//	lmdb.IsErrno(err, lmdb.TxnFull)
+//	lmdb.IsErrnoSys(err, syscall.EINVAL)
+//	lmdb.IsErrnoFn(err, os.IsPermission)
 type Errno C.int
 
 // minimum and maximum values produced for the Errno type. syscall.Errnos of
