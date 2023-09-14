@@ -1,5 +1,34 @@
 # Release Change Log
 
+## v1.9.1 (2023-09-14)
+
+- Fix release numbers in the readme by @pieterlexis in https://github.com/PowerDNS/lmdb-go/pull/10
+- Define IntegerKey and IntegerDup flags by @wojas in https://github.com/PowerDNS/lmdb-go/pull/12
+- Upgrade LMDB C lib from 0.9.28 to 0.9.29 by @wojas in https://github.com/PowerDNS/lmdb-go/pull/13
+- Upgrade LMDB to 0.9.31 by @wojas in https://github.com/PowerDNS/lmdb-go/pull/14
+- CI: switch to Github Actions by @wojas in https://github.com/PowerDNS/lmdb-go/pull/15
+
+LMDB C library changes:
+
+```
+LMDB 0.9.31 Release (2023/07/10)
+	ITS#8447 - Fix cursor_put(MDB_CURRENT) on DUPSORT DB with different sized data
+
+LMDB 0.9.30 Release (2023/02/08)
+	ITS#9806 - LMDB page_split: key threshold depends on page size
+	ITS#9916 - avoid gcc optimization bug on sparc64 linux
+	ITS#9919 - Mark infrequently used functions as cold
+	ITS#9723 - clear C_EOF on cursor with MDB_FIRST_DUP
+	ITS#9030 - Use sys/cachectl.h rather than asm/cachectl.h on mips
+
+LMDB 0.9.29 Release (2021/03/16)
+	ITS#9461 refix ITS#9376
+	ITS#9500 fix regression from ITS#8662
+```
+
+
+**Full Changelog**: https://github.com/PowerDNS/lmdb-go/compare/v1.9.0...v0.9.1
+
 ## v1.9.0 (2021-04-20)
 
 First release of this PowerDNS/lmdb-go fork.
