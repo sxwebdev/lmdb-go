@@ -18,7 +18,6 @@ import (
 	"io"
 	"log"
 	"os"
-	"reflect"
 	"strings"
 	"unsafe"
 
@@ -237,12 +236,8 @@ func doPrintFree(env *lmdb.Env, opt *Options) error {
 			numpages += ipages
 			if opt.PrintFreeSummary || opt.PrintFreeFull {
 				bad := ""
-				hdr := reflect.SliceHeader{
-					Data: uintptr(unsafe.Pointer(&data[0])),
-					Len:  int(ipages) + 1,
-					Cap:  int(ipages) + 1,
-				}
-				pages := *(*[]C.size_t)(unsafe.Pointer(&hdr))
+				datap := (*C.size_t)(unsafe.Pointer(&data[0]))
+				pages := unsafe.Slice(datap, ipages+1)
 				pages = pages[1:]
 				var span C.size_t
 				prev := C.size_t(1)
