@@ -355,6 +355,9 @@ func TestCursor_Get_DupFixed(t *testing.T) {
 
 		for i := int64(0); i < int64(numitems); i++ {
 			err = txn.Put(dbi, key, []byte(fmt.Sprintf("%016x", i)), 0)
+			if err != nil {
+				return err
+			}
 		}
 
 		return nil

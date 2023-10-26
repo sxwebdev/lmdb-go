@@ -24,7 +24,7 @@ func TestTxn_ID(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if 0 != id0 {
+	if id0 != 0 {
 		t.Errorf("unexpected readonly id (before update): %v (!= %v)", id0, 0)
 	}
 
@@ -34,7 +34,7 @@ func TestTxn_ID(t *testing.T) {
 		return
 	}
 	defer txnCached.Abort()
-	if 0 != txnCached.ID() {
+	if txnCached.ID() != 0 {
 		t.Errorf("unexpected readonly id (before update): %v (!= %v)", txnCached.ID(), 0)
 	}
 	if txnCached.getID() != txnCached.ID() {
@@ -90,7 +90,7 @@ func TestTxn_ID(t *testing.T) {
 	if id1 != id2 {
 		t.Errorf("unexpected readonly id: %v (!= %v)", id2, id1)
 	}
-	if 0 != id3 {
+	if id3 != 0 {
 		t.Errorf("unexpected invalid id: %v (!= %v)", id3, 0)
 	}
 	if id1 != txnCached.ID() {
@@ -778,7 +778,7 @@ func TestTxn_Renew(t *testing.T) {
 		return
 	}
 	defer txn.Abort()
-	val, err := txn.Get(dbroot, []byte("k"))
+	_, err = txn.Get(dbroot, []byte("k"))
 	if !IsNotFound(err) {
 		t.Errorf("get: %v", err)
 	}
@@ -794,7 +794,7 @@ func TestTxn_Renew(t *testing.T) {
 		t.Error(err)
 	}
 
-	val, err = txn.Get(dbroot, []byte("k"))
+	_, err = txn.Get(dbroot, []byte("k"))
 	if !IsNotFound(err) {
 		t.Errorf("get: %v", err)
 	}
@@ -804,7 +804,7 @@ func TestTxn_Renew(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	val, err = txn.Get(dbroot, []byte("k"))
+	val, err := txn.Get(dbroot, []byte("k"))
 	if err != nil {
 		t.Error(err)
 	}
@@ -1097,8 +1097,6 @@ func BenchmarkTxn_Sub_abort(b *testing.B) {
 		defer b.StopTimer()
 		for i := 0; i < b.N; i++ {
 			txn.Sub(func(txn *Txn) (err error) { return e })
-			if e == nil {
-			}
 		}
 		return nil
 	})
