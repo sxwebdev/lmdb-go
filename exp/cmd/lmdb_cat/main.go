@@ -178,7 +178,7 @@ func cat(path string, opt *catOptions) error {
 	if err != nil {
 		return err
 	}
-	err = env.Open(path, lmdbcmd.OpenFlag(), 644)
+	err = env.Open(path, lmdbcmd.OpenFlag(), 0644)
 	defer env.Close()
 	if err != nil {
 		return err
