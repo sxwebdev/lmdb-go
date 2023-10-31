@@ -17,19 +17,14 @@ import (
 var EnvEx *lmdb.Env
 var DBIEx lmdb.DBI
 
-// These values can only be used is code-only examples (no test output).
+// These values can only be used in code-only examples (no test output).
 var env *lmdb.Env
-var txn *lmdb.Txn
 var dbi lmdb.DBI
-var dbname string
 var err error
 var stop chan struct{}
 
 // These values can be used as no-op placeholders in examples.
-func doUpdate(txn *lmdb.Txn) error  { return nil }
-func doUpdate1(txn *lmdb.Txn) error { return nil }
-func doUpdate2(txn *lmdb.Txn) error { return nil }
-func doView(txn *lmdb.Txn) error    { return nil }
+func doUpdate(txn *lmdb.Txn) error { return nil }
 
 // This example demonstrates a complete workflow for a simple application
 // working with LMDB.  First, an Env is configured and mapped to memory.  Once
@@ -219,8 +214,6 @@ retry:
 	}
 	// ...
 }
-
-func backupFailed(err error) {}
 
 // This example uses env.Copy to periodically create atomic backups of an
 // environment.  A real implementation would need to solve problems with

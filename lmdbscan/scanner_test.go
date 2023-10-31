@@ -9,10 +9,6 @@ import (
 	"github.com/PowerDNS/lmdb-go/lmdb"
 )
 
-type errcheck func(err error) (ok bool)
-
-var pIsNil = func(err error) bool { return err == nil }
-
 func TestScanner_err(t *testing.T) {
 	env, err := lmdbtest.NewEnv(nil)
 	if err != nil {
