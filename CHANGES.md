@@ -1,5 +1,21 @@
 # Release Change Log
 
+## v1.9.2 (2023-12-07)
+
+## What's Changed
+* Fix: allocate C memory for MDB_val in readonly Txn by @wojas in https://github.com/PowerDNS/lmdb-go/pull/29
+* Disable memcpy() overflow warnings in C compilation by @shane-ns1 in https://github.com/PowerDNS/lmdb-go/pull/19
+* Replace reflect.SliceHeader with unsafe.Slice by @shane-ns1 in https://github.com/PowerDNS/lmdb-go/pull/21
+* Add names to fields used in tests by @shane-ns1 in https://github.com/PowerDNS/lmdb-go/pull/22
+* Fix file mode in Open() statement by @shane-ns1 in https://github.com/PowerDNS/lmdb-go/pull/24
+* Fix issues reported by staticcheck in tests by @shane-ns1 in https://github.com/PowerDNS/lmdb-go/pull/26
+
+## New Contributors
+* @shane-ns1 made their first contribution in https://github.com/PowerDNS/lmdb-go/pull/19
+* @fiatjaf reported https://github.com/PowerDNS/lmdb-go/issues/28
+
+**Full Changelog**: https://github.com/PowerDNS/lmdb-go/compare/v1.9.1...v1.9.2
+
 ## v1.9.1 (2023-09-14)
 
 - Fix release numbers in the readme by @pieterlexis in https://github.com/PowerDNS/lmdb-go/pull/10
