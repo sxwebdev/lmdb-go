@@ -918,6 +918,54 @@ func TestTxn_Reset_writeTxn(t *testing.T) {
 	}
 }
 
+// This test demonstrates that in a readonly transaction C memory is allocated
+// for the values, and freed during a Reset.
+func TestTxn_Reset_readonly_C_free(t *testing.T) {
+	env := setup(t)
+	path, err := env.Path()
+	if err != nil {
+		env.Close()
+		t.Error(err)
+		return
+	}
+	defer os.RemoveAll(path)
+	defer env.Close()
+
+	runtime.LockOSThread()
+	defer runtime.UnlockOSThread()
+
+	txn, err := env.BeginTxn(nil, Readonly)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	defer txn.Abort()
+
+	// Since this is a readonly transaction, the global Env key/val cannot be
+	// reused and new C memory must be allocated.
+	if txn.cbuf == nil {
+		t.Error("cbuf expected to not be nil when opening a readonly Txn")
+	}
+
+	// Reset must not free the buffer
+	txn.Reset()
+	if txn.cbuf == nil {
+		t.Error("cbuf must not be nil after Reset")
+	}
+
+	// Abort must free the buffer
+	txn.Abort()
+	if txn.cbuf != nil {
+		t.Error("cbuf expected to be nil, C memory not freed")
+	}
+	if txn.key != nil || txn.val != nil {
+		t.Error("key and val expected to be nil after C memory free")
+	}
+
+	// A second Abort must not panic
+	txn.Abort()
+}
+
 func TestTxn_UpdateLocked(t *testing.T) {
 	env := setup(t)
 	path, err := env.Path()
