@@ -964,7 +964,7 @@ func TestTxn_Reset_readonly_C_free(t *testing.T) {
 		return
 	}
 	if txn.cbuf == nil {
-		t.Error("cbuf must not be nil after Reset")
+		t.Error("cbuf must not be nil after Renew")
 		return
 	}
 
