@@ -943,6 +943,9 @@ func TestTxn_Reset_readonly_C_free(t *testing.T) {
 
 	// Since this is a readonly transaction, the global Env key/val cannot be
 	// reused and new C memory must be allocated.
+	if txn.key == env.ckey || txn.val == env.cval {
+		t.Error("env.ckey and cval must not be used in a readonly Txn")
+	}
 	if txn.cbuf == nil {
 		t.Error("cbuf expected to not be nil when opening a readonly Txn")
 	}
@@ -951,6 +954,18 @@ func TestTxn_Reset_readonly_C_free(t *testing.T) {
 	txn.Reset()
 	if txn.cbuf == nil {
 		t.Error("cbuf must not be nil after Reset")
+		return
+	}
+
+	// Renew must not free the buffer
+	err = txn.Renew()
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	if txn.cbuf == nil {
+		t.Error("cbuf must not be nil after Reset")
+		return
 	}
 
 	// Abort must free the buffer
