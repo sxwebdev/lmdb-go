@@ -63,6 +63,9 @@ type Txn struct {
 	// reset/renewed
 	id uintptr
 
+	// Pointer to scratch space for key and val in readonly transactions
+	cbuf unsafe.Pointer
+
 	env  *Env
 	_txn *C.MDB_txn
 	key  *C.MDB_val
@@ -87,12 +90,20 @@ func beginTxn(env *Env, parent *Txn, flags uint) (*Txn, error) {
 			txn.key = env.ckey
 			txn.val = env.cval
 		} else {
-			// It is not easy to share C.MDB_val values in this scenario unless
-			// there is a synchronized pool involved, which will increase
-			// overhead.  Further, allocating these values with C will add
-			// overhead both here and when the values are freed.
-			txn.key = new(C.MDB_val)
-			txn.val = new(C.MDB_val)
+			// Readonly transaction.
+			// We cannot share global C.MDB_val values in this scenario, because
+			// there can be multiple simultaneous read transactions.
+			// Allocate C memory for two values in one call.
+			// This is freed in clearTxn(), which is always called at the end
+			// of a transaction through Commit() or Abort().
+			if C.sizeof_MDB_val == 0 {
+				panic("zero C.sizeof_MDB_val") // should never happen
+			}
+			txn.cbuf = C.malloc(2 * C.sizeof_MDB_val)
+			txn.key = (*C.MDB_val)(txn.cbuf)
+			txn.val = (*C.MDB_val)(unsafe.Pointer(
+				uintptr(txn.cbuf) + uintptr(C.sizeof_MDB_val),
+			))
 		}
 	} else {
 		// Because parent Txn objects cannot be used while a sub-Txn is active
@@ -240,6 +251,14 @@ func (txn *Txn) clearTxn() {
 	// sure the value returned for an invalid Txn is more or less consistent
 	// for people familiar with the C semantics.
 	txn.resetID()
+
+	// Release C allocated buffer, if used
+	if txn.cbuf != nil {
+		txn.key = nil
+		txn.val = nil
+		C.free(txn.cbuf)
+		txn.cbuf = nil
+	}
 }
 
 // resetID has to be called anytime the value of Txn.getID() may change
