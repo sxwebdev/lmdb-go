@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/PowerDNS/lmdb-go/internal/lmdbtest"
-	"github.com/PowerDNS/lmdb-go/lmdb"
+	"github.com/sxwebdev/lmdb-go/internal/lmdbtest"
+	"github.com/sxwebdev/lmdb-go/lmdb"
 )
 
 var optNoLock = &lmdbtest.EnvOptions{Flags: lmdb.NoLock}
@@ -35,7 +35,7 @@ func TestNewEnv(t *testing.T) {
 		return
 	}
 	defer env.Close()
-	err = env.Open(dir, 0, 0644)
+	err = env.Open(dir, 0, 0o644)
 	if err != nil {
 		t.Error(err)
 		return
@@ -67,7 +67,7 @@ func TestEnv_Open(t *testing.T) {
 		return
 	}
 	defer env.Close()
-	err = env.Open(dir, 0, 0644)
+	err = env.Open(dir, 0, 0o644)
 	if err != nil {
 		t.Error(err)
 		return
@@ -79,7 +79,7 @@ func TestEnv_Open(t *testing.T) {
 
 	// calling Open on an open environment will fail.  env.noLock should not be
 	// set on a failing call to Open.
-	err = env.Open(dir, lmdb.NoLock, 0644)
+	err = env.Open(dir, lmdb.NoLock, 0o644)
 	if !lmdb.IsErrnoSys(err, syscall.EINVAL) {
 		t.Error(err)
 	}
@@ -102,7 +102,7 @@ func TestNewEnv_noLock(t *testing.T) {
 		return
 	}
 	defer env.Close()
-	err = env.Open(dir, lmdb.NoLock, 0644)
+	err = env.Open(dir, lmdb.NoLock, 0o644)
 	if err != nil {
 		t.Error(err)
 		return
@@ -165,7 +165,7 @@ func TestNewEnv_arg(t *testing.T) {
 		t.Errorf("flag lmdb.NoLock detected incorrectly")
 	}
 
-	err = env.Open(dir, lmdb.NoLock, 0644)
+	err = env.Open(dir, lmdb.NoLock, 0o644)
 	if err != nil {
 		t.Error(err)
 		return
@@ -196,7 +196,7 @@ func TestNewEnv_noLock_arg(t *testing.T) {
 		t.Error(err)
 		return
 	}
-	err = _env.Open(dir, lmdb.NoLock, 0644)
+	err = _env.Open(dir, lmdb.NoLock, 0o644)
 	if err != nil {
 		t.Error(err)
 		return
@@ -254,7 +254,6 @@ func TestEnv_SetMapSize(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-
 }
 
 func TestEnv_BeginTxn(t *testing.T) {

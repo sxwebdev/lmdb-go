@@ -7,8 +7,8 @@ import (
 
 	"golang.org/x/net/context"
 
-	"github.com/PowerDNS/lmdb-go/internal/lmdbtest"
-	"github.com/PowerDNS/lmdb-go/lmdb"
+	"github.com/sxwebdev/lmdb-go/internal/lmdbtest"
+	"github.com/sxwebdev/lmdb-go/lmdb"
 )
 
 type testHandler struct {
@@ -59,7 +59,6 @@ type passthroughHandler struct{}
 
 func (*passthroughHandler) HandleTxnErr(ctx context.Context, env *Env, err error) (context.Context, error) {
 	return ctx, err
-
 }
 
 func TestMapFullHandler(t *testing.T) {

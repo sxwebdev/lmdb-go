@@ -9,19 +9,23 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/PowerDNS/lmdb-go/lmdb"
+	"github.com/sxwebdev/lmdb-go/lmdb"
 )
 
 // These values shouldn't actually be assigned to.  The are used as stand-ins
 // for tests which do not act as tests.
-var EnvEx *lmdb.Env
-var DBIEx lmdb.DBI
+var (
+	EnvEx *lmdb.Env
+	DBIEx lmdb.DBI
+)
 
 // These values can only be used in code-only examples (no test output).
-var env *lmdb.Env
-var dbi lmdb.DBI
-var err error
-var stop chan struct{}
+var (
+	env  *lmdb.Env
+	dbi  lmdb.DBI
+	err  error
+	stop chan struct{}
+)
 
 // These values can be used as no-op placeholders in examples.
 func doUpdate(txn *lmdb.Txn) error { return nil }
@@ -49,7 +53,7 @@ func Example() {
 	if err != nil {
 		// ..
 	}
-	err = env.Open("/path/to/db/", 0, 0644)
+	err = env.Open("/path/to/db/", 0, 0o644)
 	if err != nil {
 		// ..
 	}
@@ -178,7 +182,7 @@ func ExampleEnv_SetMapSize() {
 		// ...
 	}
 
-	err = env.Open("mydb", 0, 0644)
+	err = env.Open("mydb", 0, 0o644)
 	if err != nil {
 		// ...
 	}
@@ -226,7 +230,7 @@ func ExampleEnv_Copy() {
 			case <-backup:
 				now := time.Now().UTC()
 				backup := fmt.Sprintf("backup-%s", now.Format(time.RFC3339))
-				os.Mkdir(backup, 0755)
+				os.Mkdir(backup, 0o755)
 				err = env.Copy(backup)
 				if err != nil {
 					// ...
@@ -325,7 +329,7 @@ func ExampleEnv() {
 	// open the environment only after the it has been configured.  some
 	// settings may only be called before the environment is opened where
 	// others may have caveats.
-	err = env.Open("mydb/", 0, 0664)
+	err = env.Open("mydb/", 0, 0o664)
 	if err != nil {
 		// ...
 	}
@@ -561,7 +565,6 @@ func ExampleCursor_Renew() {
 
 	keys := make(chan []byte)
 	go func() {
-
 		// Close must called when the cursor is no longer needed.
 		defer cur.Close()
 

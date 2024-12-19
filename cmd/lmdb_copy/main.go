@@ -14,8 +14,8 @@ import (
 	"log"
 	"os"
 
-	"github.com/PowerDNS/lmdb-go/internal/lmdbcmd"
-	"github.com/PowerDNS/lmdb-go/lmdb"
+	"github.com/sxwebdev/lmdb-go/internal/lmdbcmd"
+	"github.com/sxwebdev/lmdb-go/lmdb"
 )
 
 func main() {
@@ -51,7 +51,7 @@ func copyEnv(srcpath, dstpath string, opt *Options) error {
 	if err != nil {
 		return err
 	}
-	err = env.Open(srcpath, lmdbcmd.OpenFlag(), 0644)
+	err = env.Open(srcpath, lmdbcmd.OpenFlag(), 0o644)
 	if err != nil {
 		return err
 	}
