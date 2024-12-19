@@ -28,8 +28,8 @@ import (
 
 	"golang.org/x/net/context"
 
-	"github.com/PowerDNS/lmdb-go/exp/lmdbsync"
-	"github.com/PowerDNS/lmdb-go/lmdb"
+	"github.com/sxwebdev/lmdb-go/exp/lmdbsync"
+	"github.com/sxwebdev/lmdb-go/lmdb"
 )
 
 func main() {
@@ -152,7 +152,7 @@ func OpenEnv(path string) (*lmdbsync.Env, error) {
 	if err != nil {
 		return nil, err
 	}
-	err = env.Open(path, 0, 0644)
+	err = env.Open(path, 0, 0o644)
 	if err != nil {
 		env.Close()
 		return nil, err

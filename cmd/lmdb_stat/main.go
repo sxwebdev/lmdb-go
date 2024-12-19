@@ -21,9 +21,9 @@ import (
 	"strings"
 	"unsafe"
 
-	"github.com/PowerDNS/lmdb-go/internal/lmdbcmd"
-	"github.com/PowerDNS/lmdb-go/lmdb"
-	"github.com/PowerDNS/lmdb-go/lmdbscan"
+	"github.com/sxwebdev/lmdb-go/internal/lmdbcmd"
+	"github.com/sxwebdev/lmdb-go/lmdb"
+	"github.com/sxwebdev/lmdb-go/lmdbscan"
 )
 
 func main() {
@@ -109,7 +109,7 @@ func doMain(opt *Options) error {
 			return err
 		}
 	}
-	err = env.Open(opt.Path, lmdbcmd.OpenFlag(), 0644)
+	err = env.Open(opt.Path, lmdbcmd.OpenFlag(), 0o644)
 	defer env.Close()
 	if err != nil {
 		return err

@@ -4,12 +4,14 @@ import (
 	"bytes"
 	"log"
 
-	"github.com/PowerDNS/lmdb-go/lmdb"
-	"github.com/PowerDNS/lmdb-go/lmdbscan"
+	"github.com/sxwebdev/lmdb-go/lmdb"
+	"github.com/sxwebdev/lmdb-go/lmdbscan"
 )
 
-var env *lmdb.Env
-var dbi lmdb.DBI
+var (
+	env *lmdb.Env
+	dbi lmdb.DBI
+)
 
 // This example demonstrates basic usage of a Scanner to scan a database.  It
 // is important to always call scanner.Err() which will returned any unexpected

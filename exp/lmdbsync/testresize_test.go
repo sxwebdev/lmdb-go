@@ -13,7 +13,7 @@ import (
 
 	"golang.org/x/net/context"
 
-	"github.com/PowerDNS/lmdb-go/lmdb"
+	"github.com/sxwebdev/lmdb-go/lmdb"
 )
 
 func TestResize(t *testing.T) {
@@ -24,7 +24,7 @@ func TestResize(t *testing.T) {
 	defer os.RemoveAll(tempdir)
 
 	dbpath := filepath.Join(tempdir, "db")
-	err = os.Mkdir(dbpath, 0755)
+	err = os.Mkdir(dbpath, 0o755)
 	if err != nil {
 		t.Error(err)
 		return
@@ -36,7 +36,7 @@ func TestResize(t *testing.T) {
 		return
 	}
 	defer env.Close()
-	err = env.Open(dbpath, 0, 0644)
+	err = env.Open(dbpath, 0, 0o644)
 	if err != nil {
 		t.Error(err)
 		return

@@ -1,32 +1,40 @@
 # Release Change Log
 
+## v1.9.3 (2024-12-07)
+
+### What's Changed
+
+- Bump lmdb version to `0.9.33` https://github.com/sxwebdev/lmdb-go/pull/1
+
 ## v1.9.2 (2023-12-07)
 
-## What's Changed
-* Fix: allocate C memory for MDB_val in readonly Txn by @wojas in https://github.com/PowerDNS/lmdb-go/pull/29
-* Disable memcpy() overflow warnings in C compilation by @shane-ns1 in https://github.com/PowerDNS/lmdb-go/pull/19
-* Replace reflect.SliceHeader with unsafe.Slice by @shane-ns1 in https://github.com/PowerDNS/lmdb-go/pull/21
-* Add names to fields used in tests by @shane-ns1 in https://github.com/PowerDNS/lmdb-go/pull/22
-* Fix file mode in Open() statement by @shane-ns1 in https://github.com/PowerDNS/lmdb-go/pull/24
-* Fix issues reported by staticcheck in tests by @shane-ns1 in https://github.com/PowerDNS/lmdb-go/pull/26
+### What's Changed
 
-## New Contributors
-* @shane-ns1 made their first contribution in https://github.com/PowerDNS/lmdb-go/pull/19
-* @fiatjaf reported https://github.com/PowerDNS/lmdb-go/issues/28
+- Fix: allocate C memory for MDB_val in readonly Txn by @wojas in https://github.com/sxwebdev/lmdb-go/pull/29
+- Disable memcpy() overflow warnings in C compilation by @shane-ns1 in https://github.com/sxwebdev/lmdb-go/pull/19
+- Replace reflect.SliceHeader with unsafe.Slice by @shane-ns1 in https://github.com/sxwebdev/lmdb-go/pull/21
+- Add names to fields used in tests by @shane-ns1 in https://github.com/sxwebdev/lmdb-go/pull/22
+- Fix file mode in Open() statement by @shane-ns1 in https://github.com/sxwebdev/lmdb-go/pull/24
+- Fix issues reported by staticcheck in tests by @shane-ns1 in https://github.com/sxwebdev/lmdb-go/pull/26
 
-**Full Changelog**: https://github.com/PowerDNS/lmdb-go/compare/v1.9.1...v1.9.2
+### New Contributors
+
+- @shane-ns1 made their first contribution in https://github.com/sxwebdev/lmdb-go/pull/19
+- @fiatjaf reported https://github.com/sxwebdev/lmdb-go/issues/28
+
+**Full Changelog**: https://github.com/sxwebdev/lmdb-go/compare/v1.9.1...v1.9.2
 
 ## v1.9.1 (2023-09-14)
 
-- Fix release numbers in the readme by @pieterlexis in https://github.com/PowerDNS/lmdb-go/pull/10
-- Define IntegerKey and IntegerDup flags by @wojas in https://github.com/PowerDNS/lmdb-go/pull/12
-- Upgrade LMDB C lib from 0.9.28 to 0.9.29 by @wojas in https://github.com/PowerDNS/lmdb-go/pull/13
-- Upgrade LMDB to 0.9.31 by @wojas in https://github.com/PowerDNS/lmdb-go/pull/14
-- CI: switch to Github Actions by @wojas in https://github.com/PowerDNS/lmdb-go/pull/15
+- Fix release numbers in the readme by @pieterlexis in https://github.com/sxwebdev/lmdb-go/pull/10
+- Define IntegerKey and IntegerDup flags by @wojas in https://github.com/sxwebdev/lmdb-go/pull/12
+- Upgrade LMDB C lib from 0.9.28 to 0.9.29 by @wojas in https://github.com/sxwebdev/lmdb-go/pull/13
+- Upgrade LMDB to 0.9.31 by @wojas in https://github.com/sxwebdev/lmdb-go/pull/14
+- CI: switch to Github Actions by @wojas in https://github.com/sxwebdev/lmdb-go/pull/15
 
 LMDB C library changes:
 
-```
+```text
 LMDB 0.9.31 Release (2023/07/10)
 	ITS#8447 - Fix cursor_put(MDB_CURRENT) on DUPSORT DB with different sized data
 
@@ -42,39 +50,38 @@ LMDB 0.9.29 Release (2021/03/16)
 	ITS#9500 fix regression from ITS#8662
 ```
 
-
-**Full Changelog**: https://github.com/PowerDNS/lmdb-go/compare/v1.9.0...v0.9.1
+**Full Changelog**: https://github.com/sxwebdev/lmdb-go/compare/v1.9.0...v0.9.1
 
 ## v1.9.0 (2021-04-20)
 
 First release of this PowerDNS/lmdb-go fork.
 
-- Renamed module from `github.com/bmatsuo/lmdb-go` to `github.com/PowerDNS/lmdb-go` (#3, PR #7)
+- Renamed module from `github.com/bmatsuo/lmdb-go` to `github.com/sxwebdev/lmdb-go` (#3, PR #7)
 - Add `go.mod` and fix tests and Travis CI on recent Go versions (#5, PR #6)
 - Fix: Cursor.Put would write "\x00" instead of an empty value (#1, PR #2)
 - Remove experimental, never released `exp/lmdbpool` package (PR #9)
 - lmdb: Update LMDB C library to version 0.9.28 (#4).
 
-```
+```text
 	LMDB 0.9.28 Release (2021/02/04)
 		ITS#8662 add -a append option to mdb_load
-	
+
 	LMDB 0.9.27 Release (2020/10/26)
 		ITS#9376 fix repeated DUPSORT cursor deletes
-	
+
 	LMDB 0.9.26 Release (2020/08/11)
 		ITS#9278 fix robust mutex cleanup for FreeBSD
-	
+
 	LMDB 0.9.25 Release (2020/01/30)
 		ITS#9068 fix mdb_dump/load backslashes in printable content
 		ITS#9118 add MAP_NOSYNC for FreeBSD
 		ITS#9155 free mt_spill_pgs in non-nested txn on end
-	
+
 	LMDB 0.9.24 Release (2019/07/24)
 		ITS#8969 Tweak mdb_page_split
 		ITS#8975 WIN32 fix writemap set_mapsize crash
 		ITS#9007 Fix loose pages in WRITEMAP
-	
+
 	LMDB 0.9.23 Release (2018/12/19)
 		ITS#8756 Fix loose pages in dirty list
 		ITS#8831 Fix mdb_load flag init
@@ -82,22 +89,21 @@ First release of this PowerDNS/lmdb-go fork.
 		Documentation
 			ITS#8857 mdb_cursor_del doesn't invalidate cursor
 			ITS#8908 GET_MULTIPLE etc don't change passed in key
-	
+
 	LMDB 0.9.22 Release (2018/03/22)
 		Fix MDB_DUPSORT alignment bug (ITS#8819)
 		Fix regression with new db from 0.9.19 (ITS#8760)
 		Fix liblmdb to build on Solaris (ITS#8612)
 		Fix delete behavior with DUPSORT DB (ITS#8622)
 		Fix mdb_cursor_get/mdb_cursor_del behavior (ITS#8722)
-	
+
 	LMDB 0.9.21 Release (2017/06/01)
 		Fix xcursor after cursor_del (ITS#8622)
-	
+
 	LMDB 0.9.20 (Withdrawn)
 		Fix mdb_load with escaped plaintext (ITS#8558)
 		Fix mdb_cursor_last / mdb_put interaction (ITS#8557)
 ```
-
 
 Changes predating the PowerDNS fork (up to 2017):
 
@@ -112,8 +118,8 @@ Changes predating the PowerDNS fork (up to 2017):
 - Experimental package lmdbpool was added to make integration of lmdb and
   sync.Pool easier (bmatsuo/lmdb-go#104 bmatsuo/lmdb-go#105)
 
-```
-go get github.com/PowerDNS/lmdb-go/exp/lmdbpool
+```text
+go get github.com/sxwebdev/lmdb-go/exp/lmdbpool
 ```
 
 - Silence aggressive struct initializer warning from clang (bmatsuo/lmdb-go#107)
@@ -126,7 +132,7 @@ go get github.com/PowerDNS/lmdb-go/exp/lmdbpool
   considered stable and suitable for general use.
 - lmdb: Update LMDB C library to version 0.9.19 (bmatsuo/lmdb-go#92).
 
-```
+```text
 	Fix mdb_env_cwalk cursor init (ITS#8424)
 	Fix robust mutexes on Solaris 10/11 (ITS#8339)
 	Tweak Win32 error message buffer
@@ -248,7 +254,6 @@ go get github.com/PowerDNS/lmdb-go/exp/lmdbpool
         Allow passing mandir to make install (ITS#8169)
 ```
 
-
 ## v1.3.0
 
 - all: Builds on Windows with passing tests. Fixes bmatsuo/lmdb-go#33.
@@ -257,7 +262,7 @@ go get github.com/PowerDNS/lmdb-go/exp/lmdbpool
 - all: Internal test package for setting up, populating, and tearing down environments.
 - lmdbscan: Fix panic in Scanner.Scan after Txn.OpenCursor fails. Fixes bmatsuo/lmdb-go#21.
 - lmdbscan: Scanner.Set[Next] methods move the cursor and make the next
-  Scanner.Scan a noop.  The changes should be backwards compatible. Fixes bmatsuo/lmdb-go#17.
+  Scanner.Scan a noop. The changes should be backwards compatible. Fixes bmatsuo/lmdb-go#17.
 - lmdb: Cgo calling convention meets rules set forth for go1.6. Fixes bmatsuo/lmdb-go#10.
 - lmdb: add a "Package" code example that shows a complete workflow
 
